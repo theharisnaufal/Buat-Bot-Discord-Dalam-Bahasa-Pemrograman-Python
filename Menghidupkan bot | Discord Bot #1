@@ -1,14 +1,14 @@
 import discord
-from discord.ext import commands
 
-client = commands.Bot(command_prefix="!", intents=discord.Intents.all())
+class MyClient(discord.Client):
+    async def on_ready(self):
+        print(f'Bot Ini Sudah Bisa Digunakan {self.user}!')
 
-@client.event
-async def on_ready():
-    print("=============================================")
-    print("Tezobot | BOT Ini Sudah Siap Untuk Digunakan!")
-    print("=============================================")
+    async def on_message(self, message):
+        print(f'Message from {message.author}: {message.content}')
 
+intents = discord.Intents.default()
+intents.message_content = True
 
-@client.command()
-async def
+client = MyClient(intents=intents)
+client.run('Masukan Token Bot Anda!')
